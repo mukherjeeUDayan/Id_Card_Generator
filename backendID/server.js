@@ -13,7 +13,7 @@ const app = express();
 const storage = multer.diskStorage({
 //destination directory for uploaded files
 destination: (req, file, cb) => {
-cb(null, "uploads/");//filename for uploaded files
+cb(null, "/tmp/");//filename for uploaded files
 },
 filename: (req, file, cb) => {
 cb(
@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 // Middleware to enable Cross-Origin Resource Sharing
 app.use(cors());
 // Middleware to serve static files from the 'uploads' directory
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "tmp")));
 //route to handle ID card generation
 app.post("/generate-id-card", upload.single("photo"), async (req, res) =>
 {
