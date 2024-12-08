@@ -25,7 +25,7 @@ formData.append("college", college);
 try {
 // Send POST request to the backend to generate ID card
 const response = await axios.post(
-"http://localhost:5000/generate-id-card",
+"http://id-card-generator-five.vercel.app/generate-id-card",
 formData,
 {
 headers: {
@@ -107,7 +107,7 @@ required
 <div className="id-card-section photo-section">
 {idCard.photo && (
 <img
-src={`http://localhost:5000/uploads/${idCard.photo}`}
+src={`http://id-card-generator-five.vercel.app/uploads/${idCard.photo}`}
 alt="Student Photo"
 />
 )}
