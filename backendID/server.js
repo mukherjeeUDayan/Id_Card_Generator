@@ -59,5 +59,7 @@ res.json(idCardData);
 res.status(500).json({ error: "Failed to generate QR code" });
 }
 });
+
+app.use(express.static(path.join(__dirname, 'build')))
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
