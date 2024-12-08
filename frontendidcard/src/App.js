@@ -11,6 +11,7 @@ const [vali, setVali] = useState("");
 const [photo, setPhoto] = useState("");
 const [idCard, setIdCard] = useState("");
 const [college, setCollege] = useState("");
+const [photoPreview, setPhotoPreview] = useState("");
 //form submission
 const handleSubmit = async (e) => {
 e.preventDefault(); // Prevent default form submission
@@ -35,11 +36,29 @@ headers: {
 );
 //state update with the generated ID card data
 setIdCard(response.data);
+generatePhotoPreview();
 } catch (error) {
 //error handling during the request
 console.error("Error generating ID card:", error);
 }
 };
+
+function generatePhotoPreview() {
+    const reader = new FileReader();
+    
+    reader.onloadend = () => {
+      // Once the file is read, set the base64 result as a preview image
+      setPhotoPreview(reader.result);
+      console.log(reader.result);
+    };
+    
+    // If the file is selected, read it as a Data URL (base64)
+    if (photo) {
+        console.log(photo);
+      reader.readAsDataURL(photo);
+    }
+}
+
 return (
 <div className="App">
 <h1>ID Card & QR code Generator</h1>
@@ -107,7 +126,7 @@ required
 <div className="id-card-section photo-section">
 {idCard.photo && (
 <img
-src={`https://id-card-generator-five.vercel.app/uploads/${idCard.photo}`}
+src={photoPreview}
 alt="Student Photo"
 />
 )}
